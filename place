@@ -1,0 +1,137 @@
+create table tourist(tid int(5) primary key, tname varchar(20), country varchar(20), age int(10));
+
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tid     | int         | NO   | PRI | NULL    |       |
+| tname   | varchar(20) | YES  |     | NULL    |       |
+| country | varchar(20) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+insert into tourist values("1","shivani","india",'21');
+insert into tourist values("2","teju","southkorea",'24');
+ insert into tourist values("3","jansi","chinna",'29');
+insert into tourist values("4","sahana","seoul",'23');
+insert into tourist values("5","ritesh","africa",'13');
+
+
+mysql> select * from tourist;
++-----+---------+------------+------+
+| tid | tname   | country    | age  |
++-----+---------+------------+------+
+|   1 | shivani | india      |   21 |
+|   2 | teju    | southkorea |   24 |
+|   3 | jansi   | chinna     |   29 |
+|   4 | sahana  | seoul      |   23 |
+|   5 | ritesh  | africa     |   13 |
+
+
+
+
+create table t_place(tpid varchar(20) primary key, tpname varchar(20), state varchar(20), kilo int(5), history varchar(20));
+
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tpid    | varchar(20) | NO   | PRI | NULL    |       |
+| tpname  | varchar(20) | YES  |     | NULL    |       |
+| state   | varchar(20) | YES  |     | NULL    |       |
+| kilo    | int         | YES  |     | NULL    |       |
+| history | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+
+insert into t_place values("tp1","davangere","karnataka",'22',"glasshouse");
+insert into t_place values("tp2","rnr","karnataka",'29',"cotton"); 
+insert into t_place values("tp3","udpi","karnataka",'19',"temple");
+insert into t_place values("tp4","kochi","kerala",'50',"beach");
+insert into t_place values("tp5","kedar","tamilnadu",'55',"chruch");
+
+
+------+-----------+-----------+------+------------+
+| tpid | tpname    | state     | kilo | history    |
++------+-----------+-----------+------+------------+
+| tp1  | davangere | karnataka |   22 | glasshouse |
+| tp2  | rnr       | karnataka |   29 | cotton     |
+| tp3  | udpi      | karnataka |   19 | temple     |
+| tp4  | kochi     | kerala    |   50 | beach      |
+| tp5  | kedar     | tamilnadu |   55 | chruch     |
++------+-----------+-----------+------+------------+
+
+
+
+create table Visit(v_date date,tpid varchar(20)references t_place(tpid), tid varchar(20)references tourist(tid));
+
+
+ Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| v_date | date        | YES  |     | NULL    |       |
+| tpid   | varchar(20) | YES  |     | NULL    |       |
+| tid    | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
+
+ insert into Visit values("2021-05-02","tp3","2");
+ insert into Visit values("2021-06-02","tp2","3");
+ insert into Visit values("2021-04-02","tp4","4");
+insert into Visit values("2021-04-02","tp5","5");
+insert into Visit values("2021-03-02","tp1","3");
+insert into Visit values("2021-03-02","tp2","3");
+
+
+v_date     | tpid | tid  |
++------------+------+------+
+| 2021-05-02 | tp3  | 2    |
+| 2021-06-02 | tp2  | 3    |
+| 2021-04-02 | tp4  | 4    |
+| 2021-04-02 | tp5  | 5    |
+| 2021-03-02 | tp1  | 3    |
+| 2021-03-02 | tp2  | 3    |
++------------+------+------+
+
+
+
+create table email(tid varchar(20)references tourist(tid), email varchar(20));
+
+
+------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tid   | varchar(20) | YES  |     | NULL    |       |
+| email | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+
+insert into email values("1","shivani@gmail.com");
+insert into email values("2","teju@gmail.com");
+insert into email values("3","jansi@gmail.com");
+insert into email values("4","sahana@gmail.com");
+insert into email values("5","ritesh@gmail.com");
+
+ tid  | email             |
++------+-------------------+
+| 1    | shivani@gmail.com |
+| 2    | teju@gmail.com    |
+| 3    | jansi@gmail.com   |
+| 4    | sahana@gmail.com  |
+| 5    | ritesh@gmail.com  |
++------+-------------------+
+
+select state,count(tpid) from t_place group by state order by count(tpid)desc limit 1;
++-----------+-------------+
+| state     | count(tpid) |
++-----------+-------------+
+| karnataka |           3 |
++-----------+-------------+
+
+select * from t_place where tpid=(select tpid from Visit group by tpid order by count(tpid) desc limit 1);
++------+--------+-----------+------+---------+
+| tpid | tpname | state     | kilo | history |
++------+--------+-----------+------+---------+
+| tp2  | rnr    | karnataka |   29 | cotton  |
++------+--------+-----------+------+---------+
+
+
