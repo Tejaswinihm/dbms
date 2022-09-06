@@ -1,0 +1,256 @@
+desc const;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| c_id         | varchar(20) | NO   | PRI | NULL    |       |
+| cname        | varchar(20) | YES  |     | NULL    |       |
+| cstate       | varchar(20) | YES  |     | NULL    |       |
+| no_of_voters | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc can;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ca_id | varchar(20) | NO   | PRI | NULL    |       |
+| p_no  | int         | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| state | varchar(20) | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| pid   | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc voter;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| vid   | varchar(20) | NO   | PRI | NULL    |       |
+| vname | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| addr  | varchar(20) | YES  |     | NULL    |       |
+| c_id  | varchar(20) | YES  |     | NULL    |       |
+| ca_id | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc party;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| pid     | varchar(20) | NO   | PRI | NULL    |       |
+| pname   | varchar(20) | YES  |     | NULL    |       |
+| psymbol | varchar(10) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+desc contest;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| c_id  | varchar(20) | NO   | PRI | NULL    |       |
+| ca_id | varchar(20) | NO   | PRI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+
+
+
+
+
+
+
+select * from const;
++------+--------------+------------+--------------+
+| c_id | cname        | cstate     | no_of_voters |
++------+--------------+------------+--------------+
+| c1   | nagara       | karnataka  |          200 |
+| c2   | neharu       | kerala     |          200 |
+| c3   | neharu       | maharastra |          300 |
+| c4   | vidyanagar   | tamilnadu  |          400 |
+| c5   | keshavnagar  | kerala     |          400 |
+| c6   | kuvempunagar | andra      |          600 |
++------+--------------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from can;
++-------+-----------+------+------------+---------+------+
+| ca_id | p_no      | age  | state      | name    | pid  |
++-------+-----------+------+------------+---------+------+
+| 111   |  12345678 |   20 | karnataka  | shivani | p1   |
+| 222   | 123457878 |   23 | kerala     | teju    | p1   |
+| 333   | 123450878 |   24 | maharastra | sahana  | p2   |
+| 444   | 123450978 |   22 | karnataka  | jansi   | p3   |
+| 555   | 123445978 |   29 | andra      | rithesh | p4   |
+| 666   | 123445978 |   26 | karnataka  | karthi  | p5   |
++-------+-----------+------+------------+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from party;
++-----+------------+---------+
+| pid | pname      | psymbol |
++-----+------------+---------+
+| p1  | bjp        | kamala  |
+| p2  | congress   | hand    |
+| p3  | jds        | clock   |
+| p4  | prjapaksha | cycle   |
++-----+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from voter;
++-----+--------+------+----------+------+-------+
+| vid | vname  | age  | addr     | c_id | ca_id |
++-----+--------+------+----------+------+-------+
+| v1  | dhanya |   22 | manglore | c1   | 111   |
+| v2  | prethi |   23 | dvg      | c2   | 222   |
+| v3  | abhi   |   24 | durga    | c3   | 222   |
+| v4  | shahid |   28 | hrr      | c3   | 333   |
+| v5  | vinay  |   21 | rnr      | c4   | 555   |
+| v6  | chran  |   26 | banglore | c5   | 444   |
++-----+--------+------+----------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from contest;
++------+-------+
+| c_id | ca_id |
++------+-------+
+| c1   | 111   |
+| c2   | 111   |
+| c2   | 222   |
+| c3   | 333   |
+| c4   | 555   |
+| c5   | 444   |
+| c6   | 111   |
+| c6   | 444   |
++------+-------+
+8 rows in set (0.00 sec)
+
+
+
+
+
+------------------------tourist program-----------------------------------------
+
+desc tourist;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tid     | int         | NO   | PRI | NULL    |       |
+| tname   | varchar(20) | YES  |     | NULL    |       |
+| country | varchar(20) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc t_place;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tpid    | varchar(20) | NO   | PRI | NULL    |       |
+| tpname  | varchar(20) | YES  |     | NULL    |       |
+| state   | varchar(20) | YES  |     | NULL    |       |
+| kilo    | int         | YES  |     | NULL    |       |
+| history | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc Visit;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| v_date | date        | YES  |     | NULL    |       |
+| tpid   | varchar(20) | YES  |     | NULL    |       |
+| tid    | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc email;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tid   | varchar(20) | YES  |     | NULL    |       |
+| email | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tourist;
++-----+---------+------------+------+
+| tid | tname   | country    | age  |
++-----+---------+------------+------+
+|   1 | shivani | india      |   21 |
+|   2 | teju    | southkorea |   24 |
+|   3 | jansi   | chinna     |   29 |
+|   4 | sahana  | seoul      |   23 |
+|   5 | ritesh  | africa     |   13 |
++-----+---------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from t_place;
++------+-----------+-----------+------+------------+
+| tpid | tpname    | state     | kilo | history    |
++------+-----------+-----------+------+------------+
+| tp1  | davangere | karnataka |   22 | glasshouse |
+| tp2  | rnr       | karnataka |   29 | cotton     |
+| tp3  | udpi      | karnataka |   19 | temple     |
+| tp4  | kochi     | kerala    |   50 | beach      |
+| tp5  | kedar     | tamilnadu |   55 | chruch     |
++------+-----------+-----------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Visit;
++------------+------+------+
+| v_date     | tpid | tid  |
++------------+------+------+
+| 2021-05-02 | tp3  | 2    |
+| 2021-04-02 | tp4  | 4    |
+| 2021-04-02 | tp5  | 5    |
+| 2022-06-22 | tp1  | 2    |
+| 2022-06-12 | tp2  | 2    |
+| 2022-09-12 | tp1  | 3    |
+| 2022-09-22 | tp2  | 3    |
+| 2022-09-21 | tp3  | 3    |
+| 2022-03-21 | tp4  | 3    |
+| 2022-03-29 | tp5  | 3    |
+| 2022-01-22 | tp1  | 1    |
+| 2022-01-12 | tp1  | 2    |
+| 2022-01-18 | tp1  | 3    |
+| 2022-09-18 | tp1  | 4    |
+| 2022-03-13 | tp1  | 5    |
++------------+------+------+
+15 rows in set (0.00 sec)
+
+mysql> select * from email;
++------+-------------------+
+| tid  | email             |
++------+-------------------+
+| 1    | shivani@gmail.com |
+| 2    | teju@gmail.com    |
+| 3    | jansi@gmail.com   |
+| 4    | sahana@gmail.com  |
+| 5    | ritesh@gmail.com  |
++------+-------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
